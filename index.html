@@ -1,296 +1,647 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>College Website</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-</head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Explore Marwadi College of Engineering, its vision, mission, programs, campus events and career opportunities.">
+  <title>Marwadi College of Engineering</title>
 
+  <!-- Bootstrap CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <!-- Bootstrap Icons -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
+
+  <style>
+    :root {
+      --navy: #082b4c;
+      --blue: #087cf0;
+      --blue-dark: #075fbd;
+      --teal: #08a99b;
+      --purple: #7955e8;
+      --orange: #ff8a19;
+      --ink: #15324f;
+      --muted: #62758a;
+      --pale: #f2f8ff;
+      --line: #dfebf7;
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; scroll-padding-top: 82px; }
+    body {
+      margin: 0;
+      font-family: "Inter", sans-serif;
+      color: var(--ink);
+      background: #fff;
+      line-height: 1.65;
+    }
+    a { text-decoration: none; }
+    section { scroll-margin-top: 82px; }
+    .section-space { padding: 76px 0; }
+    .section-kicker {
+      color: var(--blue);
+      font-size: .78rem;
+      font-weight: 800;
+      letter-spacing: .13em;
+      text-transform: uppercase;
+      margin-bottom: 8px;
+    }
+    .section-title {
+      color: var(--navy);
+      font-weight: 800;
+      letter-spacing: -.035em;
+      margin-bottom: 10px;
+    }
+    .section-subtitle { color: var(--muted); max-width: 650px; }
+    .section-heading { margin-bottom: 32px; }
+
+    /* Navigation */
+    .site-nav {
+      background: rgba(5, 39, 69, .97);
+      box-shadow: 0 5px 22px rgba(3, 25, 46, .13);
+      padding: 12px 0;
+    }
+    .brand-mark {
+      width: 44px; height: 44px;
+      display: inline-grid; place-items: center;
+      color: white; border: 2px solid rgba(255,255,255,.8);
+      border-radius: 12px; font-size: 1.35rem;
+      margin-right: 10px; flex-shrink: 0;
+    }
+    .navbar-brand { display: flex; align-items: center; color: #fff !important; }
+    .brand-name { display: block; font-weight: 800; font-size: 1.02rem; line-height: 1.25; }
+    .brand-subtitle { display: block; font-size: .72rem; color: #d2e6fa; font-weight: 500; }
+    .site-nav .nav-link {
+      color: #e4effa; font-size: .88rem; font-weight: 600;
+      padding: 10px 12px !important; transition: color .25s ease;
+    }
+    .site-nav .nav-link:hover, .site-nav .nav-link:focus { color: #72c4ff; }
+    .nav-cta, .btn-primary-custom {
+      display: inline-flex; align-items: center; justify-content: center; gap: 9px;
+      background: var(--blue); color: white; border: 0;
+      padding: 12px 22px; border-radius: 999px; font-weight: 700;
+      transition: transform .25s ease, background .25s ease, box-shadow .25s ease;
+      box-shadow: 0 8px 22px rgba(8,124,240,.22);
+    }
+    .nav-cta:hover, .btn-primary-custom:hover {
+      background: var(--blue-dark); color: white; transform: translateY(-2px);
+      box-shadow: 0 12px 25px rgba(8,124,240,.28);
+    }
+    .navbar-toggler { border-color: rgba(255,255,255,.45); }
+    .navbar-toggler:focus { box-shadow: 0 0 0 .2rem rgba(255,255,255,.2); }
+
+    /* Hero */
+    .hero {
+      min-height: 590px; position: relative; display: flex; align-items: center;
+      overflow: hidden; color: white;
+      background:
+        linear-gradient(90deg, rgba(4,34,61,.92) 0%, rgba(4,42,74,.77) 38%, rgba(4,42,74,.15) 100%),
+        url("https://images.unsplash.com/photo-1562774053-701939374585?auto=format&fit=crop&w=2200&q=85") center 48% / cover no-repeat;
+    }
+    .hero::after {
+      content: ""; position: absolute; left: 0; right: 0; bottom: 0; height: 110px;
+      background: linear-gradient(transparent, rgba(3,28,49,.24)); pointer-events: none;
+    }
+    .hero-content { position: relative; z-index: 1; padding: 92px 0 105px; }
+    .hero-label {
+      display: inline-flex; align-items: center; gap: 10px; color: #d5ebff;
+      font-size: .9rem; font-weight: 600; margin-bottom: 18px;
+    }
+    .hero-label::before { content: ""; width: 28px; height: 3px; border-radius: 4px; background: #39b8ff; }
+    .hero h1 {
+      max-width: 720px; font-size: clamp(2.6rem, 5.4vw, 4.65rem);
+      line-height: 1.05; letter-spacing: -.055em; font-weight: 800; margin-bottom: 22px;
+    }
+    .hero h1 span { color: #75c9ff; }
+    .hero p { max-width: 540px; font-size: clamp(1.05rem, 2vw, 1.28rem); color: #e0efff; margin-bottom: 30px; }
+    .hero-actions { display: flex; flex-wrap: wrap; gap: 13px; }
+    .btn-outline-light-custom {
+      display: inline-flex; align-items: center; justify-content: center; gap: 9px;
+      border: 1px solid rgba(255,255,255,.75); color: white;
+      border-radius: 999px; padding: 11px 22px; font-weight: 700;
+      transition: background .25s ease, color .25s ease, transform .25s ease;
+    }
+    .btn-outline-light-custom:hover { background: white; color: var(--navy); transform: translateY(-2px); }
+    .hero-stat-row { display: flex; flex-wrap: wrap; gap: 32px; margin-top: 48px; }
+    .hero-stat strong { display: block; font-size: 1.35rem; font-weight: 800; }
+    .hero-stat span { font-size: .83rem; color: #d4e8f9; }
+
+    /* Vision and mission */
+    .intro-section { padding: 54px 0 30px; }
+    .info-card {
+      height: 100%; display: flex; gap: 18px; padding: 28px;
+      border: 1px solid var(--line); border-radius: 20px;
+      background: linear-gradient(135deg, #f0f8ff, #fff);
+      transition: transform .3s ease, box-shadow .3s ease;
+    }
+    .info-card.mission { background: linear-gradient(135deg, #eefbf8, #fff); }
+    .info-card:hover { transform: translateY(-5px); box-shadow: 0 16px 35px rgba(18,57,91,.09); }
+    .info-icon {
+      width: 56px; height: 56px; border-radius: 17px; flex-shrink: 0;
+      display: grid; place-items: center; color: var(--blue); background: #d9edff; font-size: 1.5rem;
+    }
+    .mission .info-icon { color: #078c80; background: #d5f5ed; }
+    .info-card h2 { font-size: 1.4rem; font-weight: 800; color: var(--navy); }
+    .info-card p { color: var(--muted); margin-bottom: 0; }
+    .mission-list { list-style: none; padding: 0; margin: 0; }
+    .mission-list li { display: flex; gap: 10px; margin: 7px 0; color: #476278; }
+    .mission-list i { color: #0ca58f; }
+
+    /* Outcomes */
+    .outcomes-section { padding: 48px 0 76px; }
+    .outcome-card {
+      height: 100%; padding: 25px; border: 1px solid var(--line); border-radius: 18px;
+      background: #fff; transition: transform .3s ease, box-shadow .3s ease;
+    }
+    .outcome-card:hover { transform: translateY(-6px); box-shadow: 0 15px 35px rgba(20,58,92,.1); }
+    .outcome-icon {
+      width: 58px; height: 58px; border-radius: 18px; display: grid; place-items: center;
+      color: white; font-size: 1.55rem; margin-bottom: 18px;
+    }
+    .blue { background: linear-gradient(135deg, #139cff, #0868d9); }
+    .purple { background: linear-gradient(135deg, #a184ff, #6d46df); }
+    .teal { background: linear-gradient(135deg, #16cbb8, #039b91); }
+    .orange { background: linear-gradient(135deg, #ffb044, #ff7b10); }
+    .outcome-card h3 { font-size: 1.08rem; font-weight: 800; color: var(--navy); }
+    .outcome-card p { font-size: .92rem; color: var(--muted); margin: 0; }
+
+    /* Courses */
+    .courses-section { background: var(--pale); }
+    .course-card {
+      height: 100%; background: white; border: 1px solid #e0ecf8;
+      border-radius: 19px; padding: 25px; overflow: hidden;
+      transition: transform .3s ease, box-shadow .3s ease;
+    }
+    .course-card:hover { transform: translateY(-7px); box-shadow: 0 17px 38px rgba(17,63,104,.12); }
+    .course-card h3 { min-height: 52px; font-size: 1.05rem; font-weight: 800; color: var(--navy); }
+    .course-card p { color: var(--muted); font-size: .9rem; }
+    .course-card .btn-primary-custom { width: 100%; padding: 10px 16px; font-size: .86rem; }
+    .course-card .outcome-icon { margin-bottom: 20px; }
+
+    /* Gallery */
+    .gallery-card {
+      position: relative; overflow: hidden; border-radius: 18px; min-height: 280px;
+      background: #dbe8f3; box-shadow: 0 8px 22px rgba(7,37,65,.08);
+    }
+    .gallery-card img {
+      display: block; width: 100%; height: 300px; object-fit: cover;
+      transition: transform .55s ease, filter .4s ease;
+    }
+    .gallery-card:hover img { transform: scale(1.07); filter: brightness(.78); }
+    .gallery-overlay {
+      position: absolute; inset: 0; display: flex; flex-direction: column; justify-content: end;
+      padding: 24px; color: white;
+      background: linear-gradient(transparent 35%, rgba(3,25,45,.88));
+    }
+    .gallery-overlay h3 { font-size: 1.2rem; font-weight: 800; margin-bottom: 5px; }
+    .gallery-overlay p { font-size: .85rem; margin: 0; color: #e3effb; }
+
+    /* Recruiters */
+    .recruiters-section { background: #f6faff; }
+    .recruiter-card {
+      height: 100%; min-height: 105px; display: flex; align-items: center; justify-content: center;
+      flex-direction: column; gap: 5px; background: white; border: 1px solid var(--line);
+      border-radius: 16px; padding: 18px; transition: transform .25s ease, box-shadow .25s ease;
+    }
+    .recruiter-card:hover { transform: translateY(-4px); box-shadow: 0 12px 28px rgba(14,54,91,.09); }
+    .recruiter-card strong { color: var(--navy); font-size: 1.05rem; font-weight: 800; }
+    .recruiter-card span { color: var(--muted); font-size: .8rem; }
+
+    /* Contact and footer */
+    .contact-band { padding: 54px 0; background: linear-gradient(115deg, #087cf0, #0756aa); color: white; }
+    .contact-band h2 { font-weight: 800; letter-spacing: -.03em; }
+    .contact-band p { color: #d9ebff; margin-bottom: 0; }
+    .contact-band .btn { background: white; color: var(--blue-dark); border: 0; font-weight: 800; border-radius: 999px; padding: 12px 22px; }
+    .site-footer { color: #d3e3f2; background: #062744; }
+    .footer-main { padding: 54px 0 36px; }
+    .footer-heading { color: white; font-size: .98rem; font-weight: 800; margin-bottom: 17px; }
+    .footer-links { list-style: none; padding: 0; margin: 0; }
+    .footer-links li { margin-bottom: 9px; }
+    .footer-links a { color: #c1d5e7; font-size: .88rem; transition: color .2s ease; }
+    .footer-links a:hover { color: #64c2ff; }
+    .contact-line { display: flex; gap: 10px; margin-bottom: 12px; font-size: .88rem; }
+    .contact-line i { color: #64c2ff; margin-top: 3px; }
+    .social-links { display: flex; gap: 9px; }
+    .social-links a {
+      display: grid; place-items: center; width: 38px; height: 38px; border-radius: 11px;
+      color: white; background: rgba(255,255,255,.1); transition: background .2s ease, transform .2s ease;
+    }
+    .social-links a:hover { background: var(--blue); transform: translateY(-3px); }
+    .footer-bottom { border-top: 1px solid rgba(255,255,255,.13); padding: 18px 0; font-size: .82rem; }
+    .back-to-top {
+      position: fixed; right: 22px; bottom: 22px; z-index: 1000;
+      width: 44px; height: 44px; display: grid; place-items: center;
+      border: 0; border-radius: 50%; background: var(--blue); color: white;
+      box-shadow: 0 7px 20px rgba(8,124,240,.3); opacity: 0; visibility: hidden;
+      transform: translateY(10px); transition: all .25s ease;
+    }
+    .back-to-top.visible { opacity: 1; visibility: visible; transform: translateY(0); }
+    .reveal { opacity: 0; transform: translateY(22px); transition: opacity .65s ease, transform .65s ease; }
+    .reveal.show { opacity: 1; transform: translateY(0); }
+
+    @media (max-width: 991.98px) {
+      .site-nav .navbar-collapse { padding-top: 14px; }
+      .site-nav .nav-link { padding: 9px 0 !important; }
+      .nav-cta { margin-top: 8px; }
+      .hero { min-height: 560px; background-position: 58% center; }
+    }
+    @media (max-width: 575.98px) {
+      .section-space { padding: 56px 0; }
+      .hero { min-height: 590px; background-position: 60% center; }
+      .hero-content { padding: 78px 0 80px; }
+      .hero h1 { font-size: 2.65rem; }
+      .hero-stat-row { gap: 22px; margin-top: 36px; }
+      .info-card { padding: 22px; flex-direction: column; }
+      .gallery-card img { height: 260px; }
+      .contact-band .btn { margin-top: 18px; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { scroll-behavior: auto !important; transition-duration: .01ms !important; animation-duration: .01ms !important; }
+      .reveal { opacity: 1; transform: none; }
+    }
+  </style>
+</head>
 <body>
-    <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
-        <div class="container">
-            <a class="navbar-brand fw-bold" href="#">
-                Marwadi University
-            </a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav ms-auto">
-                    <li class="nav-item">
-                        <a class="nav-link" href="#vision">Vision</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#mission">Mission</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#outcomes">PSO</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#courses">Courses</a>
-                    </li>
-                    <li class="nav-item">
-<a class="nav-link" href="#gallery">Gallery</a>
-</li>
-<li class="nav-item">
-<a class="nav-link" href="#recruiters">Recruiters</a>
-</li>
-</ul>
-</div>
-</div>
-</nav>
-<div class="container-fluid bg-light text-center py-5">
-<h1 class="display-4 fw-bold">
-Marwadi College of Engineering
-</h1>
-<p class="lead">
-Excellence in Education, Innovation and Research
-</p>
-<button class="btn btn-primary">
-Explore College
-</button>
-</div>
-<div class="container my-5">
-<div class="row g-4">
-<div class="col-md-6" id="vision">
-<div class="card h-100 shadow">
-<div class="card-header bg-primary text-white">
-<h3>Vision</h3>
-</div>
-<div class="card-body">
-<p class="card-text">
-To become a leading institution providing quality
-education and developing skilled professionals who
-contribute to society and the nation.
-</p>
-</div>
-</div>
-</div>
-<div class="col-md-6" id="mission">
-<div class="card h-100 shadow">
-<div class="card-header bg-success text-white">
-<h3>Mission</h3>
-</div>
-<div class="card-body">
-<ul class="list-group">
-<li class="list-group-item">
-Provide quality technical education.
-</li>
-<li class="list-group-item">
-Encourage innovation and research.
-</li>
-<li class="list-group-item">
-Develop professional and ethical values.
-</li>
-<li class="list-group-item">
-Prepare students for industry requirements.
-</li>
-</ul>
-</div>
-</div>
-</div>
-</div>
-</div>
-<div class="container my-5" id="outcomes">
-<h2 class="text-center mb-4">
-Program Specific Outcomes
-</h2>
-<div class="row g-4">
-<div class="col-md-4">
-<div class="card text-center h-100">
-<div class="card-body">
-<h4 class="card-title">
-PSO 1
-</h4>
-<p class="card-text">
-Apply technical knowledge to solve real-world
-engineering problems.
-</p>
-</div>
-</div>
-</div>
-<div class="col-md-4">
-<div class="card text-center h-100">
-<div class="card-body">
-<h4 class="card-title">
-PSO 2
-</h4>
-<p class="card-text">
-Develop innovative solutions using modern
-technologies and tools.
-</p>
-</div>
-</div>
-</div>
-<div class="col-md-4">
-<div class="card text-center h-100">
-<div class="card-body">
-<h4 class="card-title">
-PSO 3
-</h4>
-<p class="card-text">
-Demonstrate professional skills and teamwork
-in industry and society.
-</p>
-</div>
-</div>
-</div>
-</div>
-</div>
-<div class="container my-5" id="courses">
-<h2 class="text-center mb-4">
-Courses Offered
-</h2>
-<div class="row g-4">
-<div class="col-md-3">
-<div class="card h-100 text-center">
-<div class="card-body">
-<h5 class="card-title">
-B.Tech Computer Engineering
-</h5>
-<p class="card-text">
-Duration: 4 Years
-</p>
-<button class="btn btn-primary">
-View Course
-</button>
-</div>
-</div>
-</div>
-<div class="col-md-3">
-<div class="card h-100 text-center">
-<div class="card-body">
-<h5 class="card-title">
-Information Technology
-</h5>
-<p class="card-text">
-Duration: 4 Years
-</p>
-<button class="btn btn-primary">
-View Course
-</button>
-</div>
-</div>
-</div>
-<div class="col-md-3">
-<div class="card h-100 text-center">
-<div class="card-body">
-<h5 class="card-title">
-Electronics Engineering
-</h5>
-<p class="card-text">
-Duration: 4 Years
-</p>
-<button class="btn btn-primary">
-    View Course
-</button>
-</div>
-</div>
-</div>
-<div class="col-md-3">
-<div class="card h-100 text-center">
-<div class="card-body">
-<h5 class="card-title">
-Mechanical Engineering
-</h5>
-<p class="card-text">
-Duration: 4 Years
-</p>
-<button class="btn btn-primary">
-View Course
-</button>
-</div>
-</div>
-</div>
-</div>
-</div>
-<div class="container my-5" id="gallery">
-<h2 class="text-center mb-4">
-Image Gallery of Events
-</h2>
-<div class="row g-4">
-<div class="col-md-4">
-<div class="card">
-<img src="https://images.openai.com/static-rsc-4/OHvkunFsy6iGpk6EwpZvF6n9kxzl7U-1N5p16ugpCzENPB4y66Tctv_GNM-xHtZMGo_JfkxlXGpvhi-6tX3qOFiqWC497Gq_r5muAb2Fo7souJmhUTyqollVnIwLgkYv0D3RwU-TSjsR6As-mTbttj-ToACVhqPaCac9aw7n0MdY_CD5GybWIeA5LBdRL_mJ?purpose=fullsize"
-class="card-img-top"
-alt="College Event">
-<div class="card-body text-center">
-<h5>Freshers Party</h5>
-</div>
-</div>
-</div>
-<div class="col-md-4">
-<div class="card">
-<img src="https://images.openai.com/static-rsc-4/Qpc09wHrmi1YRlH0gugXHNUU0za2usCArePKahP4yUQ5lQvjVMreMaiuIr9atooNwroJtJ60e1Vump9IJmXEKaGyuTSUEMwuEy2LgmHebNP0SUitTOOwW6ehwnW7bNXC0mG8RzVZojxow0Q3B59w72nUUKLsa4I_YOPBAIoz4qc?purpose=inline"
-class="card-img-top"
-alt="College Event">
-<div class="card-body text-center">
-<h5>Graduation Ceremony</h5>
-</div>
-</div>
-</div>
-<div class="col-md-4">
-<div class="card">
-<img src="https://images.openai.com/static-rsc-4/wH3ZyJcs1GQKYLYWBEn6yeuTNT4VDhzCh5GtfORZVs9mfB9viJZb4ne98XEAc4fLsEonpM17dqHX7Fb8Tqo6ugOwu_BK511b-T5q_FmRJbrwwSeSQQ2jWrV5CboBPCcrl1z_qqmupXmuvdDwBNDBdnkp8YHFhSURvzTxLPRrwFx5LWwssMleqy-N-f0k8L9q?purpose=fullsize"
-class="card-img-top"
-alt="College Event">
-<div class="card-body text-center">
-<h5>Hackathons</h5>
-</div>
-</div>
-</div>
-</div>
-</div>
-<div class="container my-5" id="recruiters">
-    <h2 class="text-center mb-4">
-Top Recruiters
-</h2>
-<div class="row g-4 text-center">
-<div class="col-6 col-md-3">
-<div class="card p-3 shadow-sm">
-<h4>Infosys</h4>
-<p class="mb-0">
-IT & Software
-</p>
-</div>
-</div>
-<div class="col-6 col-md-3">
-<div class="card p-3 shadow-sm">
-<h4>Accenture</h4>
-<p class="mb-0">
-Technology
-</p>
-</div>
-</div>
-<div class="col-6 col-md-3">
-<div class="card p-3 shadow-sm">
-<h4>Infosys</h4>
-<p class="mb-0">
-Engineering
-</p>
-</div>
-</div>
-<div class="col-6 col-md-3">
-<div class="card p-3 shadow-sm">
-<h4 style="font-size: medium;">Tata Consultancy Services</h4>
-<p class="mb-0">
-    Consulting
-</p>
-</div>
-</div>
-</div>
-</div>
-<footer class="bg-dark text-white text-center p-4">
-<h5>Marwadi College of Engineering</h5>
-<p class="mb-0">
-© 2026 Marwadi University College. All Rights Reserved.
-</p>
-</footer>
-<script
-src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
->
-</script>
+
+  <!-- Navigation -->
+  <nav class="navbar navbar-expand-lg navbar-dark site-nav sticky-top">
+    <div class="container">
+      <a class="navbar-brand" href="#home" aria-label="Marwadi College of Engineering home">
+        <span class="brand-mark"><i class="bi bi-mortarboard-fill"></i></span>
+        <span>
+          <span class="brand-name">Marwadi University</span>
+          <span class="brand-subtitle">College of Engineering</span>
+        </span>
+      </a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNav"
+        aria-controls="mainNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="mainNav">
+        <ul class="navbar-nav ms-auto align-items-lg-center gap-lg-1">
+          <li class="nav-item"><a class="nav-link" href="#home">Home</a></li>
+          <li class="nav-item"><a class="nav-link" href="#vision">Vision</a></li>
+          <li class="nav-item"><a class="nav-link" href="#mission">Mission</a></li>
+          <li class="nav-item"><a class="nav-link" href="#outcomes">PSO</a></li>
+          <li class="nav-item"><a class="nav-link" href="#courses">Courses</a></li>
+          <li class="nav-item"><a class="nav-link" href="#gallery">Gallery</a></li>
+          <li class="nav-item"><a class="nav-link" href="#recruiters">Recruiters</a></li>
+          <li class="nav-item ms-lg-2"><a class="nav-cta" href="#contact">Contact Us <i class="bi bi-arrow-up-right"></i></a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <main>
+    <!-- Hero -->
+    <header class="hero" id="home">
+      <div class="container hero-content">
+        <div class="hero-label">Welcome to a future of possibilities</div>
+        <h1>Shape Your Future at <span>Marwadi College</span> of Engineering</h1>
+        <p>Excellence in education, innovation and research — empowering students to become tomorrow's problem-solvers.</p>
+        <div class="hero-actions">
+          <a class="btn-primary-custom" href="#courses">Explore Courses <i class="bi bi-arrow-right"></i></a>
+          <a class="btn-outline-light-custom" href="#vision">Discover Our College</a>
+        </div>
+        <div class="hero-stat-row">
+          <div class="hero-stat"><strong>Learn</strong><span>Build strong foundations</span></div>
+          <div class="hero-stat"><strong>Innovate</strong><span>Turn ideas into solutions</span></div>
+          <div class="hero-stat"><strong>Grow</strong><span>Prepare for what's next</span></div>
+        </div>
+      </div>
+    </header>
+
+    <!-- Vision and mission -->
+    <section class="intro-section" aria-label="College vision and mission">
+      <div class="container">
+        <div class="row g-4">
+          <div class="col-lg-6 reveal" id="vision">
+            <article class="info-card">
+              <div class="info-icon"><i class="bi bi-eye"></i></div>
+              <div>
+                <h2>Our Vision</h2>
+                <p>To become a leading institution providing quality education and developing skilled professionals who contribute to society and the nation.</p>
+              </div>
+            </article>
+          </div>
+          <div class="col-lg-6 reveal" id="mission">
+            <article class="info-card mission">
+              <div class="info-icon"><i class="bi bi-bullseye"></i></div>
+              <div>
+                <h2>Our Mission</h2>
+                <ul class="mission-list">
+                  <li><i class="bi bi-check-circle-fill"></i><span>Provide quality technical education.</span></li>
+                  <li><i class="bi bi-check-circle-fill"></i><span>Encourage innovation and research.</span></li>
+                  <li><i class="bi bi-check-circle-fill"></i><span>Develop professional and ethical values.</span></li>
+                  <li><i class="bi bi-check-circle-fill"></i><span>Prepare students for industry requirements.</span></li>
+                </ul>
+              </div>
+            </article>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Program Specific Outcomes -->
+    <section class="outcomes-section" id="outcomes">
+      <div class="container">
+        <div class="section-heading text-center reveal">
+          <div class="section-kicker">What you'll develop</div>
+          <h2 class="section-title">Program Specific Outcomes</h2>
+          <p class="section-subtitle mx-auto">Building the skills and confidence to make a meaningful difference.</p>
+        </div>
+        <div class="row g-4">
+          <div class="col-md-4 reveal">
+            <article class="outcome-card">
+              <div class="outcome-icon blue"><i class="bi bi-gear-wide-connected"></i></div>
+              <h3>PSO 1 — Technical Expertise</h3>
+              <p>Apply technical knowledge to solve real-world engineering problems.</p>
+            </article>
+          </div>
+          <div class="col-md-4 reveal">
+            <article class="outcome-card">
+              <div class="outcome-icon purple"><i class="bi bi-lightbulb"></i></div>
+              <h3>PSO 2 — Innovation</h3>
+              <p>Develop innovative solutions using modern technologies and tools.</p>
+            </article>
+          </div>
+          <div class="col-md-4 reveal">
+            <article class="outcome-card">
+              <div class="outcome-icon teal"><i class="bi bi-people"></i></div>
+              <h3>PSO 3 — Professional Skills</h3>
+              <p>Demonstrate professional skills and teamwork in industry and society.</p>
+            </article>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Courses -->
+    <section class="section-space courses-section" id="courses">
+      <div class="container">
+        <div class="section-heading d-flex flex-column flex-md-row justify-content-between align-items-md-end gap-3 reveal">
+          <div>
+            <div class="section-kicker">Find your direction</div>
+            <h2 class="section-title">Courses Offered</h2>
+            <p class="section-subtitle mb-0">Choose a path that matches your interests and ambitions.</p>
+          </div>
+          <a class="btn-primary-custom align-self-start align-self-md-auto" href="#contact">Ask About Courses <i class="bi bi-arrow-right"></i></a>
+        </div>
+        <div class="row g-4">
+          <div class="col-sm-6 col-xl-3 reveal">
+            <article class="course-card">
+              <div class="outcome-icon blue"><i class="bi bi-laptop"></i></div>
+              <h3>B.Tech Computer Engineering</h3>
+              <p><i class="bi bi-clock me-2"></i>Duration: 4 Years</p>
+              <button class="btn-primary-custom course-btn" data-course="B.Tech Computer Engineering">View Course <i class="bi bi-arrow-right"></i></button>
+            </article>
+          </div>
+          <div class="col-sm-6 col-xl-3 reveal">
+            <article class="course-card">
+              <div class="outcome-icon purple"><i class="bi bi-cloud"></i></div>
+              <h3>Information Technology</h3>
+              <p><i class="bi bi-clock me-2"></i>Duration: 4 Years</p>
+              <button class="btn-primary-custom course-btn" data-course="Information Technology">View Course <i class="bi bi-arrow-right"></i></button>
+            </article>
+          </div>
+          <div class="col-sm-6 col-xl-3 reveal">
+            <article class="course-card">
+              <div class="outcome-icon teal"><i class="bi bi-cpu"></i></div>
+              <h3>Electronics Engineering</h3>
+              <p><i class="bi bi-clock me-2"></i>Duration: 4 Years</p>
+              <button class="btn-primary-custom course-btn" data-course="Electronics Engineering">View Course <i class="bi bi-arrow-right"></i></button>
+            </article>
+          </div>
+          <div class="col-sm-6 col-xl-3 reveal">
+            <article class="course-card">
+              <div class="outcome-icon orange"><i class="bi bi-tools"></i></div>
+              <h3>Mechanical Engineering</h3>
+              <p><i class="bi bi-clock me-2"></i>Duration: 4 Years</p>
+              <button class="btn-primary-custom course-btn" data-course="Mechanical Engineering">View Course <i class="bi bi-arrow-right"></i></button>
+            </article>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Gallery -->
+    <section class="section-space" id="gallery">
+      <div class="container">
+        <div class="section-heading d-flex flex-column flex-md-row justify-content-between align-items-md-end gap-3 reveal">
+          <div>
+            <div class="section-kicker">Life on campus</div>
+            <h2 class="section-title">Moments That Bring Us Together</h2>
+            <p class="section-subtitle mb-0">A glimpse of the celebrations, achievements and ideas that shape campus life.</p>
+          </div>
+          <a class="btn-primary-custom align-self-start align-self-md-auto" href="#contact">Explore Campus <i class="bi bi-arrow-right"></i></a>
+        </div>
+        <div class="row g-4">
+          <div class="col-md-4 reveal">
+            <article class="gallery-card">
+              <img src="https://images.unsplash.com/photo-1492684223066-81342ee5ff30?auto=format&fit=crop&w=900&q=85" alt="Crowd enjoying a live campus celebration" loading="lazy">
+              <div class="gallery-overlay">
+                <h3><i class="bi bi-stars me-2"></i>Freshers Party</h3>
+                <p>Fun · Friends · New Beginnings</p>
+              </div>
+            </article>
+          </div>
+          <div class="col-md-4 reveal">
+            <article class="gallery-card">
+              <img src="https://images.unsplash.com/photo-1523050854058-8df90110c9f1?auto=format&fit=crop&w=900&q=85" alt="Graduates celebrating an academic milestone" loading="lazy">
+              <div class="gallery-overlay">
+                <h3><i class="bi bi-mortarboard me-2"></i>Graduation Ceremony</h3>
+                <p>Dreams · Achievements · Future</p>
+              </div>
+            </article>
+          </div>
+          <div class="col-md-4 reveal">
+            <article class="gallery-card">
+              <img src="https://images.unsplash.com/photo-1519389950473-47ba0277781c?auto=format&fit=crop&w=900&q=85" alt="Students collaborating on computers and technology" loading="lazy">
+              <div class="gallery-overlay">
+                <h3><i class="bi bi-code-slash me-2"></i>Hackathons</h3>
+                <p>Ideas · Code · Innovation</p>
+              </div>
+            </article>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Recruiters -->
+    <section class="section-space recruiters-section" id="recruiters">
+      <div class="container">
+        <div class="section-heading text-center reveal">
+          <div class="section-kicker">Career opportunities</div>
+          <h2 class="section-title">Our Recruiter Network</h2>
+          <p class="section-subtitle mx-auto">Students work toward opportunities across technology, engineering and consulting.</p>
+        </div>
+        <div class="row g-3">
+          <div class="col-6 col-lg-3 reveal"><div class="recruiter-card"><strong>Infosys</strong><span>IT &amp; Software</span></div></div>
+          <div class="col-6 col-lg-3 reveal"><div class="recruiter-card"><strong>accenture</strong><span>Technology &amp; Consulting</span></div></div>
+          <div class="col-6 col-lg-3 reveal"><div class="recruiter-card"><strong>TATA</strong><span>Engineering &amp; Services</span></div></div>
+          <div class="col-6 col-lg-3 reveal"><div class="recruiter-card"><strong>TCS</strong><span>IT &amp; Consulting</span></div></div>
+        </div>
+        <p class="text-center small text-secondary mt-3 mb-0">Recruiter names are examples for this website design; verify current campus placement partners before publishing.</p>
+      </div>
+    </section>
+
+    <!-- Contact call to action -->
+    <section class="contact-band" id="contact">
+      <div class="container">
+        <div class="row align-items-center g-4">
+          <div class="col-lg-8">
+            <h2>Ready to take the next step?</h2>
+            <p>Connect with Marwadi University to learn more about courses, admissions and campus life.</p>
+          </div>
+          <div class="col-lg-4 text-lg-end">
+            <a class="btn" href="https://www.marwadiuniversity.ac.in/" target="_blank" rel="noopener noreferrer">Visit Official Website <i class="bi bi-box-arrow-up-right ms-1"></i></a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer class="site-footer">
+    <div class="container footer-main">
+      <div class="row g-5">
+        <div class="col-lg-4">
+          <a class="navbar-brand mb-3" href="#home">
+            <span class="brand-mark"><i class="bi bi-mortarboard-fill"></i></span>
+            <span>
+              <span class="brand-name">Marwadi University</span>
+              <span class="brand-subtitle">College of Engineering</span>
+            </span>
+          </a>
+          <p class="small pe-lg-4">Learn, innovate and grow. Building knowledge, skills and confidence for the future.</p>
+        </div>
+        <div class="col-6 col-lg-2">
+          <h2 class="footer-heading">Quick Links</h2>
+          <ul class="footer-links">
+            <li><a href="#home">Home</a></li>
+            <li><a href="#vision">Vision</a></li>
+            <li><a href="#mission">Mission</a></li>
+            <li><a href="#outcomes">Program Outcomes</a></li>
+          </ul>
+        </div>
+        <div class="col-6 col-lg-2">
+          <h2 class="footer-heading">Explore</h2>
+          <ul class="footer-links">
+            <li><a href="#courses">Courses</a></li>
+            <li><a href="#gallery">Gallery</a></li>
+            <li><a href="#recruiters">Recruiters</a></li>
+            <li><a href="#contact">Contact</a></li>
+          </ul>
+        </div>
+        <div class="col-lg-4">
+          <h2 class="footer-heading">Contact Information</h2>
+          <div class="contact-line"><i class="bi bi-geo-alt-fill"></i><span>Rajkot–Morbi Highway, Rajkot, Gujarat, India</span></div>
+          <div class="contact-line"><i class="bi bi-envelope-fill"></i><a class="footer-links" href="mailto:info@marwadiuniversity.ac.in">info@marwadiuniversity.ac.in</a></div>
+          <div class="contact-line"><i class="bi bi-globe2"></i><a class="footer-links" href="https://www.marwadiuniversity.ac.in/" target="_blank" rel="noopener noreferrer">marwadiuniversity.ac.in</a></div>
+          <h3 class="footer-heading mt-4 mb-3">Follow Us</h3>
+          <div class="social-links">
+            <a href="https://www.facebook.com/MarwadiUniversity/" target="_blank" rel="noopener noreferrer" aria-label="Facebook"><i class="bi bi-facebook"></i></a>
+            <a href="https://www.instagram.com/marwadiuniversity/" target="_blank" rel="noopener noreferrer" aria-label="Instagram"><i class="bi bi-instagram"></i></a>
+            <a href="https://www.linkedin.com/school/marwadi-university/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn"><i class="bi bi-linkedin"></i></a>
+            <a href="https://www.youtube.com/" target="_blank" rel="noopener noreferrer" aria-label="YouTube"><i class="bi bi-youtube"></i></a>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <div class="container d-flex flex-column flex-md-row justify-content-between gap-2">
+        <span>© <span id="year"></span> Marwadi College of Engineering. All rights reserved.</span>
+        <span>Designed for learning · Built with Bootstrap</span>
+      </div>
+    </div>
+  </footer>
+
+  <button class="back-to-top" id="backToTop" aria-label="Back to top" title="Back to top">
+    <i class="bi bi-arrow-up"></i>
+  </button>
+
+  <!-- Course information modal -->
+  <div class="modal fade" id="courseModal" tabindex="-1" aria-labelledby="courseModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content border-0 rounded-4">
+        <div class="modal-header border-0 pb-0">
+          <h2 class="modal-title fs-5 fw-bold" id="courseModalLabel">Course Details</h2>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body pt-2">
+          <p id="courseModalText" class="text-secondary">Course details.</p>
+          <p class="small mb-0">For official eligibility, fees and admission details, please visit the university website.</p>
+        </div>
+        <div class="modal-footer border-0">
+          <a class="btn-primary-custom" href="https://www.marwadiuniversity.ac.in/" target="_blank" rel="noopener noreferrer">Official Website <i class="bi bi-arrow-up-right"></i></a>
+          <button type="button" class="btn btn-light rounded-pill px-4" data-bs-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script>
+    // Update the copyright year automatically.
+    document.getElementById("year").textContent = new Date().getFullYear();
+
+    // Open a course details modal when a course button is clicked.
+    const courseButtons = document.querySelectorAll(".course-btn");
+    const courseModal = new bootstrap.Modal(document.getElementById("courseModal"));
+    const courseModalLabel = document.getElementById("courseModalLabel");
+    const courseModalText = document.getElementById("courseModalText");
+
+    courseButtons.forEach(function (button) {
+      button.addEventListener("click", function () {
+        const courseName = button.getAttribute("data-course");
+        courseModalLabel.textContent = courseName;
+        courseModalText.textContent = courseName + " is a four-year undergraduate engineering program in this demo website. Visit the official university website to confirm the current course structure and admission details.";
+        courseModal.show();
+      });
+    });
+
+    // Close the mobile navigation after selecting a link.
+    document.querySelectorAll("#mainNav .nav-link, #mainNav .nav-cta").forEach(function (link) {
+      link.addEventListener("click", function () {
+        const navMenu = document.getElementById("mainNav");
+        if (navMenu.classList.contains("show")) {
+          bootstrap.Collapse.getOrCreateInstance(navMenu).hide();
+        }
+      });
+    });
+
+    // Reveal sections smoothly as they enter the screen.
+    const revealItems = document.querySelectorAll(".reveal");
+    if ("IntersectionObserver" in window) {
+      const revealObserver = new IntersectionObserver(function (entries, observer) {
+        entries.forEach(function (entry) {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("show");
+            observer.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.12 });
+
+      revealItems.forEach(function (item) {
+        revealObserver.observe(item);
+      });
+    } else {
+      revealItems.forEach(function (item) {
+        item.classList.add("show");
+      });
+    }
+
+    // Show the back-to-top button after scrolling down.
+    const backToTop = document.getElementById("backToTop");
+    window.addEventListener("scroll", function () {
+      backToTop.classList.toggle("visible", window.scrollY > 450);
+    });
+    backToTop.addEventListener("click", function () {
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    });
+  </script>
 </body>
 </html>
